@@ -9,7 +9,6 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    
     @IBOutlet private weak var textField: UITextField!
     @IBOutlet private weak var textField2: UITextField!
     
@@ -21,36 +20,33 @@ class ViewController: UIViewController {
     
     @IBOutlet private weak var answerLabel: UILabel!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         textField.keyboardType = .numberPad
         textField2.keyboardType = .numberPad
-        
     }
     
     @IBAction func answerAction(_ sender: Any) {
-        
-        var number = Int(textField.text!) ?? 0
-        var number2 = Int(textField2.text!) ?? 0
-        
-        if leftSwitch.isOn {
-            
-            number = number - number * 2
-            
-        }
-        
-        if rightSwitch.isOn {
-            
-            number2 = number2 - number2 * 2
-            
-        }
-        
-        leftIntLabel.text = "\(number)"
-        rightIntLabel.text = "\(number2)"
-        answerLabel.text = String(number + number2)
-    }
-    
-}
+        let number = Int(textField.text!) ?? 0
+        let number2 = Int(textField2.text!) ?? 0
 
+        let signedNumber: Int
+        if leftSwitch.isOn {
+            signedNumber = -number
+        } else {
+            signedNumber = number
+        }
+
+        let signedNumber2: Int
+        if rightSwitch.isOn {
+            signedNumber2 = -number2
+        } else {
+            signedNumber2 = number2
+        }
+        
+        leftIntLabel.text = "\(signedNumber)"
+        rightIntLabel.text = "\(signedNumber2)"
+        answerLabel.text = String(signedNumber + signedNumber2)
+    }
+}
